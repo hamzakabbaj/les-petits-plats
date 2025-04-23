@@ -1,5 +1,3 @@
-import Ingredient from "./Ingredient.js";
-
 class Recipe {
   constructor(data) {
     this._id = data.id;

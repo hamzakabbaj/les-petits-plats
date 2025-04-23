@@ -1,0 +1,18 @@
+.hero_header {
+}
+
+.main {
+  &__header {
+  }
+
+  &__recipes {
+    &__recipe-card {
+      &__image {
+        img {
+          width: 100px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
