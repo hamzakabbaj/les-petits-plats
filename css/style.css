@@ -180,6 +180,10 @@ body {
   color: #7a7a7a;
 }
 
+.main__header__filters__select-box__search__clear.hidden {
+  display: none !important;
+}
+
 .main__header__filters__select-box__search__search {
   position: absolute;
   right: 25px;

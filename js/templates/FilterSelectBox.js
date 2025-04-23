@@ -14,7 +14,7 @@ class FilterSelectBox {
       </div>
       <div class="main__header__filters__select-box__search">
         <input type="text"/>
-        <i class="fa-solid fa-xmark main__header__filters__select-box__search__clear"></i>
+        <i class="fa-solid fa-xmark hidden main__header__filters__select-box__search__clear"></i>
         <i class="fa-solid fa-magnifying-glass main__header__filters__select-box__search__search"></i>
       </div>
       <ul class="main__header__filters__select-box__list">
@@ -26,6 +26,33 @@ class FilterSelectBox {
     const $title = $wrapper.querySelector(
       ".main__header__filters__select-box__title"
     );
+
+    const $clear_icon = $wrapper.querySelector(
+      ".main__header__filters__select-box__search__clear"
+    );
+
+    const $search_input = $wrapper.querySelector(
+      ".main__header__filters__select-box__search input"
+    );
+
+    $search_input.addEventListener("input", () => {
+      console.log($search_input.value);
+      if ($search_input.value.length > 0) {
+        $clear_icon.classList.remove("hidden");
+        console.log("clear icon is visible");
+      } else {
+        $clear_icon.classList.add("hidden");
+        console.log("clear icon is hidden");
+      }
+    });
+
+    $clear_icon.addEventListener("click", () => {
+      $search_input.value = "";
+      // Focus on the search input
+      $search_input.focus();
+      $clear_icon.classList.add("hidden");
+    });
+
     $title.addEventListener("click", () => {
       if ($title.classList.contains("opened")) {
         this.closeFilterSelectBox();
