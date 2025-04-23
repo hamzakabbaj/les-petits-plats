@@ -1,8 +1,9 @@
 class Filter {
-  constructor(data, label) {
+  constructor(data, label, id) {
     this._data = data;
     this._list = [];
     this._label = label;
+    this._id = id;
   }
 
   list_filter_elements() {
@@ -16,11 +17,15 @@ class Filter {
   get label() {
     return this._label;
   }
+
+  get id() {
+    return this._id;
+  }
 }
 
 class IngredientsFilter extends Filter {
   constructor(data) {
-    super(data, "Ingrédients");
+    super(data, "Ingrédients", "ingredients");
     this._list = this.list_filter_elements();
   }
 
@@ -39,7 +44,7 @@ class IngredientsFilter extends Filter {
 
 class UstensilsFilter extends Filter {
   constructor(data) {
-    super(data, "Ustensils");
+    super(data, "Ustensils", "ustensils");
     this._list = this.list_filter_elements();
   }
 
@@ -56,7 +61,7 @@ class UstensilsFilter extends Filter {
 
 class AppareilsFilter extends Filter {
   constructor(data) {
-    super(data, "Appareils");
+    super(data, "Appareils", "appareils");
     this._list = this.list_filter_elements();
   }
 
