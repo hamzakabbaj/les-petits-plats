@@ -69,11 +69,18 @@ class FilterSelectBox {
     );
   }
 
+  changeChevronIcon() {
+    const $title = this.getTitleElement();
+    $title.querySelector("i").classList.toggle("fa-chevron-down");
+    $title.querySelector("i").classList.toggle("fa-chevron-up");
+  }
+
   openFilterSelectBox() {
     this.closeAllFilterSelectBox();
     const $search = this.getSearchBoxElement();
     const $list = this.getListElement();
     const $title = this.getTitleElement();
+    this.changeChevronIcon();
     $title.classList.add("opened");
     $title.style.borderRadius = "11px 11px 0 0";
     $search.style.display = "block";
@@ -84,6 +91,7 @@ class FilterSelectBox {
     const $search = this.getSearchBoxElement();
     const $list = this.getListElement();
     const $title = this.getTitleElement();
+    this.changeChevronIcon();
     $title.classList.remove("opened");
     $title.style.borderRadius = "11px";
     $search.style.display = "none";
@@ -95,6 +103,8 @@ class FilterSelectBox {
     $titles.forEach((title) => {
       title.classList.remove("opened");
       title.style.borderRadius = "11px";
+      title.querySelector("i").classList.remove("fa-chevron-up");
+      title.querySelector("i").classList.add("fa-chevron-down");
     });
     const $search = this.getSearchBoxElement(true);
     $search.forEach((search) => {
