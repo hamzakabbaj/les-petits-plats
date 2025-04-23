@@ -176,8 +176,32 @@ body {
             color: #1b1b1b;
             cursor: pointer;
             list-style-type: none;
+            margin: 1px 0px;
             &:hover {
               background-color: #ffd15b;
+            }
+            &.selected {
+              background-color: #ffd15b;
+              font-weight: 700;
+              position: relative;
+
+              & i {
+                display: inline-block;
+              }
+            }
+            & i {
+              position: absolute;
+              right: 16px;
+              top: 10px;
+              display: none;
+              width: 17px;
+              height: 17px;
+              background-color: #000000;
+              border-radius: 50%;
+              font-size: 10px;
+              color: #ffd15b;
+              text-align: center;
+              line-height: 17px;
             }
           }
         }

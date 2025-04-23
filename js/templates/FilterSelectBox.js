@@ -1,6 +1,7 @@
 class FilterSelectBox {
   constructor(filter) {
     this._filter = filter;
+    this._selected_items = [];
   }
 
   createFilterSelectBox() {
@@ -32,6 +33,20 @@ class FilterSelectBox {
     const $search_input = $wrapper.querySelector(
       ".main__header__filters__select-box__search input"
     );
+
+    const $search_items = $wrapper.querySelectorAll(
+      ".main__header__filters__select-box__list li"
+    );
+
+    $search_items.forEach((item) => {
+      item.addEventListener("click", (e) => {
+        // If doesn't have the class selected, add it
+        if (!item.classList.contains("selected")) {
+          item.classList.add("selected");
+          this._selected_items.push(item.textContent);
+        }
+      });
+    });
 
     $search_input.addEventListener("input", () => {
       const search_value = $search_input.value;
@@ -83,7 +98,13 @@ class FilterSelectBox {
     $wrapper.classList.add("main__header__filters__select-box__list");
     $wrapper.setAttribute("id", this._filter.id);
     const filterSelectBoxItems = `
-      ${items.map((item) => `<li>${item}</li>`).join("")}
+      ${items
+        .map((item) =>
+          this._selected_items.includes(item)
+            ? `<li class="selected">${item}<i class="fa-solid fa-xmark"></i></li>`
+            : `<li>${item}<i class="fa-solid fa-xmark"></i></li>`
+        )
+        .join("")}
     `;
     $wrapper.innerHTML = filterSelectBoxItems;
     return $wrapper;
