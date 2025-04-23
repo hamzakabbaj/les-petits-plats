@@ -7,7 +7,8 @@ body {
 
 .hero_header {
   background: url("../assets/images/hero_header.jpg") no-repeat center center;
-  height: 50vh;
+  height: 60vh;
+  min-height: 800px;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -17,7 +18,8 @@ body {
     content: "";
     position: absolute;
     width: 100%;
-    height: 50vh;
+    height: 60vh;
+    min-height: 800px;
     top: 0;
     left: 0;
     background: #0000004d;

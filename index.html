@@ -11,7 +11,9 @@
     />
     <script src="js/models/Recipe.js" defer></script>
     <script src="js/models/Ingredient.js" defer></script>
+    <script src="js/models/Filter.js" defer></script>
     <script src="js/templates/RecipeCard.js" defer></script>
+    <script src="js/templates/FilterSelectBox.js" defer></script>
     <script src="js/api/Api.js" defer></script>
     <script src="js/App.js" defer></script>
   </head>
@@ -38,32 +40,7 @@
     </header>
     <main class="main">
       <div class="main__header">
-        <div class="main__header__filters">
-          <div class="main__header__filters__filter">
-            <select name="ingredients" id="ingredients">
-              <option value="all">Ingrédients</option>
-              <option value="ingredient1">Ingrédient 1</option>
-              <option value="ingredient2">Ingrédient 2</option>
-              <option value="ingredient3">Ingrédient 3</option>
-            </select>
-          </div>
-          <div class="main__header__filters__filter">
-            <select name="appareil" id="appareil">
-              <option value="all">Appareils</option>
-              <option value="appareil1">Appareil 1</option>
-              <option value="appareil2">Appareil 2</option>
-              <option value="appareil3">Appareil 3</option>
-            </select>
-          </div>
-          <div class="main__header__filters__filter">
-            <select name="ustensile" id="ustensile">
-              <option value="all">Ustensiles</option>
-              <option value="ustensile1">Ustensile 1</option>
-              <option value="ustensile2">Ustensile 2</option>
-              <option value="ustensile3">Ustensile 3</option>
-            </select>
-          </div>
-        </div>
+        <div class="main__header__filters" id="filters"></div>
         <div class="main__header__n_recipes">
           <p>1500 recettes</p>
         </div>
