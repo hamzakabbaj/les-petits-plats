@@ -1,4 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 .hero_header {
+  background: url("../assets/images/hero_header.jpg") no-repeat center center;
+  height: 50vh;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+    top: 0;
+    left: 0;
+    background: #0000004d;
+  }
+
+  &__logo img {
+    position: absolute;
+    color: white;
+    width: 180px;
+    top: 51px;
+    left: 69px;
+    z-index: 1;
+  }
+
+  &__title {
+    color: white;
+    font-family: "Anton", sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    width: 80%;
+    text-align: center;
+    color: #ffd15b;
+    z-index: 1;
+  }
+
+  &__searchbar {
+    width: 80%;
+    z-index: 1;
+    position: relative;
+
+    & input {
+      width: calc(100% - 35px);
+      height: 72px;
+      border-radius: 11px;
+      border: none;
+      padding: 0 0 0 35px;
+      font-size: 16px;
+      font-weight: 400;
+      font-family: "Manrope", sans-serif;
+    }
+
+    & button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      height: calc(100% - 20px);
+      width: 51px;
+      border-radius: 11px;
+      border: none;
+      background: #1b1b1b;
+      cursor: pointer;
+      & i {
+        color: white;
+        font-size: 24px;
+      }
+    }
+  }
 }
 
 .main {

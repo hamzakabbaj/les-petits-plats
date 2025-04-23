@@ -1,3 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+.hero_header {
+  background: url("../assets/images/hero_header.jpg") no-repeat center center;
+  height: 50vh;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.hero_header::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50vh;
+  top: 0;
+  left: 0;
+  background: #0000004d;
+}
+
+.hero_header__logo img {
+  position: absolute;
+  color: white;
+  width: 180px;
+  top: 51px;
+  left: 69px;
+  z-index: 1;
+}
+
+.hero_header__title {
+  color: white;
+  font-family: "Anton", sans-serif;
+  font-size: 44px;
+  font-weight: 400;
+  width: 80%;
+  text-align: center;
+  color: #ffd15b;
+  z-index: 1;
+}
+
+.hero_header__searchbar {
+  width: 80%;
+  z-index: 1;
+  position: relative;
+}
+
+.hero_header__searchbar input {
+  width: calc(100% - 35px);
+  height: 72px;
+  border-radius: 11px;
+  border: none;
+  padding: 0 0 0 35px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Manrope", sans-serif;
+}
+
+.hero_header__searchbar button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  height: calc(100% - 20px);
+  width: 51px;
+  border-radius: 11px;
+  border: none;
+  background: #1b1b1b;
+  cursor: pointer;
+}
+
+.hero_header__searchbar button i {
+  color: white;
+  font-size: 24px;
+}
+
 .main__recipes__recipe-card__image img {
   width: 100px;
   -o-object-fit: cover;
