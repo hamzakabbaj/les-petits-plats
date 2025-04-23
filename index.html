@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Les Petits Plats</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="hero_header">
+      <div class="hero_header__logo">
+        <h1>Les Petits Plats</h1>
+        <i></i>
+      </div>
+      <div class="hero_header__title">
+        <h2>
+          CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET
+          DÉLICIEUSES
+        </h2>
+      </div>
+      <div class="hero_header__searchbar">
+        <input
+          type="text"
+          placeholder="Rechercher une recette, un ingrédient, ..."
+        />
+        <button>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </header>
+    <main class="main">
+      <div class="main__header">
+        <div class="main__header__filters">
+          <div class="main__header__filters__filter">
+            <select name="ingredients" id="ingredients">
+              <option value="all">Ingrédients</option>
+              <option value="ingredient1">Ingrédient 1</option>
+              <option value="ingredient2">Ingrédient 2</option>
+              <option value="ingredient3">Ingrédient 3</option>
+            </select>
+          </div>
+          <div class="main__header__filters__filter">
+            <select name="appareil" id="appareil">
+              <option value="all">Appareils</option>
+              <option value="appareil1">Appareil 1</option>
+              <option value="appareil2">Appareil 2</option>
+              <option value="appareil3">Appareil 3</option>
+            </select>
+          </div>
+          <div class="main__header__filters__filter">
+            <select name="ustensile" id="ustensile">
+              <option value="all">Ustensiles</option>
+              <option value="ustensile1">Ustensile 1</option>
+              <option value="ustensile2">Ustensile 2</option>
+              <option value="ustensile3">Ustensile 3</option>
+            </select>
+          </div>
+        </div>
+        <div class="main__header__n_recipes">
+          <p>1500 recettes</p>
+        </div>
+      </div>
+      <div class="main__recipes"></div>
+    </main>
+    <footer class="footer"></footer>
+  </body>
+</html>
