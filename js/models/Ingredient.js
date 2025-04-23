@@ -10,10 +10,10 @@ class Ingredient {
   }
 
   get quantity() {
-    return parseInt(this._quantity);
+    return this._quantity ? parseInt(this._quantity) : "";
   }
 
   get unit() {
-    return this._unit;
+    return this._unit || "";
   }
 }
