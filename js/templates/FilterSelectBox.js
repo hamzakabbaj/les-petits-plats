@@ -17,11 +17,9 @@ class FilterSelectBox {
         <i class="fa-solid fa-xmark hidden main__header__filters__select-box__search__clear"></i>
         <i class="fa-solid fa-magnifying-glass main__header__filters__select-box__search__search"></i>
       </div>
-      <ul class="main__header__filters__select-box__list">
-        ${this._filter.list.map((item) => `<li>${item}</li>`).join("")}
-      </ul>
     `;
     $wrapper.innerHTML = filterSelectBox;
+    $wrapper.appendChild(this.createFilterSelectBoxItems(this._filter.list));
 
     const $title = $wrapper.querySelector(
       ".main__header__filters__select-box__title"
@@ -36,14 +34,24 @@ class FilterSelectBox {
     );
 
     $search_input.addEventListener("input", () => {
-      console.log($search_input.value);
-      if ($search_input.value.length > 0) {
+      const search_value = $search_input.value;
+      if (search_value.length > 0) {
         $clear_icon.classList.remove("hidden");
-        console.log("clear icon is visible");
       } else {
         $clear_icon.classList.add("hidden");
-        console.log("clear icon is hidden");
       }
+
+      // Contains the items
+      const filtered_list = this._filter.list.filter((item) =>
+        item.toLowerCase().includes(search_value.toLowerCase())
+      );
+      // Replace the items
+      const $list = $wrapper.querySelector(
+        ".main__header__filters__select-box__list"
+      );
+      $list.innerHTML = filtered_list
+        .map((item) => `<li>${item}</li>`)
+        .join("");
     });
 
     $clear_icon.addEventListener("click", () => {
@@ -60,6 +68,24 @@ class FilterSelectBox {
         this.openFilterSelectBox();
       }
     });
+
+    const $body = document.querySelector("body");
+    $body.addEventListener("click", (e) => {
+      if (!e.target.closest(".main__header__filters__select-box")) {
+        this.closeAllFilterSelectBox();
+      }
+    });
+    return $wrapper;
+  }
+
+  createFilterSelectBoxItems(items) {
+    const $wrapper = document.createElement("div");
+    $wrapper.classList.add("main__header__filters__select-box__list");
+    $wrapper.setAttribute("id", this._filter.id);
+    const filterSelectBoxItems = `
+      ${items.map((item) => `<li>${item}</li>`).join("")}
+    `;
+    $wrapper.innerHTML = filterSelectBoxItems;
     return $wrapper;
   }
 
