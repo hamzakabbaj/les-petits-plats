@@ -153,7 +153,8 @@ body {
 .main__header__filters__select-box__search {
   background-color: white;
   position: relative;
-  padding: 17px 16px;
+  padding: 0px 16px 10px 16px;
+  display: none;
 }
 
 .main__header__filters__select-box__search input {
@@ -172,7 +173,8 @@ body {
 .main__header__filters__select-box__search__clear {
   position: absolute;
   right: 50px;
-  top: 27px;
+  top: 13px;
+  font-size: 10px;
   cursor: pointer;
   color: #7a7a7a;
 }
@@ -180,7 +182,7 @@ body {
 .main__header__filters__select-box__search__search {
   position: absolute;
   right: 25px;
-  top: 27px;
+  top: 10px;
   cursor: pointer;
   color: #7a7a7a;
 }
@@ -188,9 +190,6 @@ body {
 .main__header__filters__select-box__list {
   display: none;
   position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   background-color: white;
   border-radius: 0 0 11px 11px;
   -webkit-box-orient: vertical;

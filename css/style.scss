@@ -119,8 +119,8 @@ body {
         &__search {
           background-color: white;
           position: relative;
-          padding: 17px 16px;
-
+          padding: 0px 16px 10px 16px;
+          display: none;
           & input {
             width: calc(100% - 10px);
             height: 36px;
@@ -137,14 +137,15 @@ body {
           &__clear {
             position: absolute;
             right: 50px;
-            top: 27px;
+            top: 13px;
+            font-size: 10px;
             cursor: pointer;
             color: #7a7a7a;
           }
           &__search {
             position: absolute;
             right: 25px;
-            top: 27px;
+            top: 10px;
             cursor: pointer;
             color: #7a7a7a;
           }
@@ -152,7 +153,7 @@ body {
         &__list {
           display: none;
           position: absolute;
-          display: flex;
+          //   display: flex;
           background-color: white;
           border-radius: 0 0 11px 11px;
           flex-direction: column;
