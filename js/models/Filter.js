@@ -20,7 +20,7 @@ class Filter {
 
 class IngredientsFilter extends Filter {
   constructor(data) {
-    super(data, "Ingredients");
+    super(data, "Ingrédients");
     this._list = this.list_filter_elements();
   }
 
