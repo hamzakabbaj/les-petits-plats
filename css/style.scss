@@ -61,7 +61,7 @@ body {
       font-family: "Manrope", sans-serif;
     }
 
-    & button {
+    &__button {
       position: absolute;
       right: 10px;
       top: 10px;
@@ -74,6 +74,18 @@ body {
       & i {
         color: white;
         font-size: 24px;
+      }
+    }
+
+    &__clear {
+      display: none;
+      position: absolute;
+      right: 80px;
+      top: 28px;
+      cursor: pointer;
+      & i {
+        color: #7a7a7a;
+        font-size: 18px;
       }
     }
   }
