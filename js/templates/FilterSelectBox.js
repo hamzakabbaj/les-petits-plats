@@ -91,6 +91,13 @@ class FilterSelectBox {
           this._selected_items.push(item.textContent);
         }
       });
+      item.querySelector("i").addEventListener("click", (e) => {
+        e.stopPropagation();
+        item.classList.remove("selected");
+        this._selected_items = this._selected_items.filter(
+          (item) => item !== item.textContent
+        );
+      });
     });
   }
 
