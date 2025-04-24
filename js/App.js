@@ -18,23 +18,8 @@ class App {
     this.createSearchBar(searchBar);
 
     // Filters
-    const IngredientsFilterSelectBox = new FilterSelectBox(
-      new IngredientsFilter(this.recipes)
-    );
-    const AppareilsFilterSelectBox = new FilterSelectBox(
-      new AppareilsFilter(this.recipes)
-    );
-    const UstensilsFilterSelectBox = new FilterSelectBox(
-      new UstensilsFilter(this.recipes)
-    );
-    IngredientsFilterSelectBox.subscribe(this);
-    AppareilsFilterSelectBox.subscribe(this);
-    UstensilsFilterSelectBox.subscribe(this);
-    this.createFilters([
-      IngredientsFilterSelectBox,
-      AppareilsFilterSelectBox,
-      UstensilsFilterSelectBox,
-    ]);
+
+    this.createFilters();
 
     // Recipes
     this.createRecipes(this.filteredRecipes);
@@ -98,10 +83,27 @@ class App {
     $heroHeaderWrapper.appendChild(searchBarElement);
   }
 
-  createFilters(Filters) {
+  createFilters() {
     const $filtersWrapper = document.getElementById("filters");
     $filtersWrapper.innerHTML = "";
-    for (const Filter of Filters) {
+    const IngredientsFilterSelectBox = new FilterSelectBox(
+      new IngredientsFilter(this.recipes)
+    );
+    const AppareilsFilterSelectBox = new FilterSelectBox(
+      new AppareilsFilter(this.recipes)
+    );
+    const UstensilsFilterSelectBox = new FilterSelectBox(
+      new UstensilsFilter(this.recipes)
+    );
+    IngredientsFilterSelectBox.subscribe(this);
+    AppareilsFilterSelectBox.subscribe(this);
+    UstensilsFilterSelectBox.subscribe(this);
+
+    for (const Filter of [
+      IngredientsFilterSelectBox,
+      AppareilsFilterSelectBox,
+      UstensilsFilterSelectBox,
+    ]) {
       $filtersWrapper.appendChild(Filter.createFilterSelectBox());
     }
   }
