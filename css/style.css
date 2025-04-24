@@ -116,7 +116,7 @@ body {
       -ms-flex-align: start;
           align-items: flex-start;
   gap: 30px;
-  width: 100%;
+  width: 80%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -126,6 +126,7 @@ body {
   min-width: 200px;
   max-width: 250px;
   position: relative;
+  border-radius: 11px;
 }
 
 .main__header__filters__select-box__title {
@@ -158,6 +159,10 @@ body {
   position: relative;
   padding: 0px 16px 10px 16px;
   display: none;
+  position: absolute;
+  top: 55px;
+  width: calc(100% - 32px);
+  z-index: 1;
 }
 
 .main__header__filters__select-box__search input {
@@ -197,6 +202,7 @@ body {
 .main__header__filters__select-box__list {
   display: none;
   position: absolute;
+  top: 99px;
   background-color: white;
   border-radius: 0 0 11px 11px;
   -webkit-box-orient: vertical;

@@ -94,13 +94,14 @@ body {
       display: flex;
       align-items: flex-start;
       gap: 30px;
-      width: 100%;
+      width: 80%;
       flex-wrap: wrap;
       &__select-box {
         width: 20%;
         min-width: 200px;
         max-width: 250px;
         position: relative;
+        border-radius: 11px;
         &__title {
           background-color: white;
           border-radius: 11px;
@@ -123,6 +124,10 @@ body {
           position: relative;
           padding: 0px 16px 10px 16px;
           display: none;
+          position: absolute;
+          top: 55px;
+          width: calc(100% - 32px);
+          z-index: 1;
           & input {
             width: calc(100% - 10px);
             height: 36px;
@@ -159,6 +164,7 @@ body {
         &__list {
           display: none;
           position: absolute;
+          top: 99px;
           //   display: flex;
           background-color: white;
           border-radius: 0 0 11px 11px;
