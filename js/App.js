@@ -1,36 +1,80 @@
 class App {
   constructor() {
-    this.$recipesWrapper = document.getElementById("recipes");
-    this.$filtersWrapper = document.getElementById("filters");
-    this.$heroHeaderWrapper = document.getElementById("hero_header");
     this.recipeApi = new RecipeApi("./data/recipes.json");
+    this.recipes = [];
+    this.filteredRecipes = [];
   }
 
   async main() {
     const recipesData = await this.recipeApi.getRecipes();
-    const recipes = recipesData.map((recipe) => new Recipe(recipe));
+    this.recipes = recipesData.map((recipe) => new Recipe(recipe));
+    this.filteredRecipes = [...this.recipes];
 
     // Search bar
-    const searchBar = new SearchBar().createSearchBar();
-    this.$heroHeaderWrapper.appendChild(searchBar);
+    const searchBar = new SearchBar();
+    searchBar.subscribe(this);
+    this.createSearchBar(searchBar);
 
     // Filters
-    const Filters = [IngredientsFilter, AppareilsFilter, UstensilsFilter];
+    this.createFilters(this.recipes, [
+      IngredientsFilter,
+      AppareilsFilter,
+      UstensilsFilter,
+    ]);
 
+    // Recipes
+    this.createRecipes(this.filteredRecipes);
+  }
+
+  // ------------------- OBSERVER PATTERN -------------------------
+  update(searchTerm) {
+    if (searchTerm.length < 3) {
+      this.filteredRecipes = [...this.recipes];
+    } else {
+      this.filteredRecipes = this.recipes.filter(
+        (recipe) =>
+          recipe.name.toLowerCase().includes(searchTerm) ||
+          recipe.description.toLowerCase().includes(searchTerm) ||
+          recipe.ingredients.some((ingredient) =>
+            ingredient.ingredient.toLowerCase().includes(searchTerm)
+          )
+      );
+    }
+    this.createRecipes(this.filteredRecipes);
+    this.createFilters(this.filteredRecipes, [
+      IngredientsFilter,
+      AppareilsFilter,
+      UstensilsFilter,
+    ]);
+  }
+
+  // ------------------- CREATE ELEMENTS -------------------------
+  createSearchBar(searchBar) {
+    const $heroHeaderWrapper = document.getElementById("hero_header");
+    const searchBarElement = searchBar.createSearchBar();
+    $heroHeaderWrapper.appendChild(searchBarElement);
+  }
+
+  createFilters(recipes, Filters) {
+    const $filtersWrapper = document.getElementById("filters");
+    $filtersWrapper.innerHTML = "";
     for (const Filter of Filters) {
       const filter = new Filter(recipes);
       const filterSelectBox = new FilterSelectBox(
         filter
       ).createFilterSelectBox();
-      this.$filtersWrapper.appendChild(filterSelectBox);
+      $filtersWrapper.appendChild(filterSelectBox);
     }
+  }
 
-    // Recipes
+  createRecipes(recipes) {
+    const $recipesWrapper = document.getElementById("recipes");
+    $recipesWrapper.innerHTML = "";
     const recipeCards = recipes.map((recipe) =>
       new RecipeCard(recipe).createRecipeCard()
     );
     for (const recipeCard of recipeCards) {
-      this.$recipesWrapper.appendChild(recipeCard);
+      $recipesWrapper.appendChild(recipeCard);
     }
   }
 }

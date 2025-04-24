@@ -1,6 +1,21 @@
 class SearchBar {
   constructor() {
     this._input = null;
+    this._observers = [];
+  }
+
+  // ------------------- OBSERVER PATTERN -------------------------
+  subscribe(observer) {
+    this._observers.push(observer);
+  }
+
+  unsubscribe(observer) {
+    this._observers = this._observers.filter((obs) => obs !== observer);
+  }
+
+  notify(searchTerm) {
+    console.log("NOTIFYING");
+    this._observers.forEach((observer) => observer.update(searchTerm));
   }
 
   // ------------------- ELEMENTS -------------------------
@@ -39,6 +54,10 @@ class SearchBar {
     $input.addEventListener("input", () => {
       if ($input.value.length > 0) {
         $clear.style.display = "block";
+        this.notify($input.value.toLowerCase());
+      } else {
+        $clear.style.display = "none";
+        this.notify("");
       }
     });
   }
@@ -47,6 +66,7 @@ class SearchBar {
     $clear.addEventListener("click", () => {
       $input.value = "";
       $clear.style.display = "none";
+      this.notify("");
     });
   }
 }
