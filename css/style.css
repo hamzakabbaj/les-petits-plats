@@ -126,7 +126,6 @@ body {
   min-width: 200px;
   max-width: 250px;
   position: relative;
-  border-radius: 11px;
 }
 
 .main__header__filters__select-box__title {
@@ -255,6 +254,35 @@ body {
   color: #ffd15b;
   text-align: center;
   line-height: 17px;
+}
+
+.main__header__filters__select-box__labels {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.main__header__filters__select-box__labels span {
+  padding: 17px 18px;
+  background-color: #ffd15b;
+  border-radius: 10px;
+  font-family: "Manrope";
+  font-size: 14px;
+  position: relative;
+}
+
+.main__header__filters__select-box__labels span i {
+  position: absolute;
+  top: 19px;
+  right: 18px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
 .main__header__n_recipes {

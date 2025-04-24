@@ -101,7 +101,6 @@ body {
         min-width: 200px;
         max-width: 250px;
         position: relative;
-        border-radius: 11px;
         &__title {
           background-color: white;
           border-radius: 11px;
@@ -209,6 +208,30 @@ body {
               color: #ffd15b;
               text-align: center;
               line-height: 17px;
+            }
+          }
+        }
+
+        &__labels {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          margin-top: 20px;
+
+          & span {
+            padding: 17px 18px;
+            background-color: #ffd15b;
+            border-radius: 10px;
+            font-family: "Manrope";
+            font-size: 14px;
+            position: relative;
+
+            & i {
+              position: absolute;
+              top: 19px;
+              right: 18px;
+              font-size: 15px;
+              cursor: pointer;
             }
           }
         }

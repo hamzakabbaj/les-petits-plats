@@ -23,6 +23,7 @@ class FilterSelectBox {
     `;
     $wrapper.innerHTML = filterSelectBox;
     $wrapper.appendChild(this.createFilterSelectBoxItems(this._filter.list));
+    $wrapper.appendChild(this.createFilterLabels());
 
     this.addEventsListeners($wrapper);
 
@@ -35,6 +36,15 @@ class FilterSelectBox {
     $wrapper.setAttribute("id", this._filter.id);
 
     this.setSearchItems(items, $wrapper);
+
+    return $wrapper;
+  }
+
+  createFilterLabels() {
+    const $wrapper = document.createElement("div");
+    $wrapper.classList.add("main__header__filters__select-box__labels");
+
+    this.setFilterLabels($wrapper);
 
     return $wrapper;
   }
@@ -81,6 +91,7 @@ class FilterSelectBox {
         if (!item.classList.contains("selected")) {
           item.classList.add("selected");
           this._selected_items.push(item.textContent);
+          this.setFilterLabels();
         }
       });
       item.querySelector("i").addEventListener("click", (e) => {
@@ -89,6 +100,7 @@ class FilterSelectBox {
         this._selected_items = this._selected_items.filter(
           (selected_item) => selected_item !== item.textContent
         );
+        this.setFilterLabels();
       });
     });
   }
@@ -182,11 +194,45 @@ class FilterSelectBox {
     this.addItemsClickListener($search_items);
   }
 
+  setFilterLabels($wrapper = null) {
+    let $labels = $wrapper;
+    if (!$labels) {
+      $labels = this.getFilterLabelsElement();
+    }
+    $labels.innerHTML = this._selected_items
+      .map((item) => `<span>${item} <i class="fa-solid fa-xmark"></i></span>`)
+      .join("");
+
+    $labels.querySelectorAll("i").forEach((i) => {
+      console.log(i);
+      i.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this._selected_items = this._selected_items.filter(
+          (selected_item) =>
+            selected_item !== i.parentElement.textContent.trim()
+        );
+        this.setFilterLabels($labels);
+        this.setSearchItems(this._filter.list, this.getListElement());
+      });
+    });
+  }
+
   // ------------------- GETTERS ------------------------
 
   getAllTitleElements() {
     return document.querySelectorAll(
       `.main__header__filters__select-box__title`
+    );
+  }
+
+  getFilterLabelsElement($wrapper = null) {
+    if ($wrapper) {
+      return $wrapper.querySelector(
+        `.main__header__filters__select-box__labels`
+      );
+    }
+    return document.querySelector(
+      `#${this._filter.id} .main__header__filters__select-box__labels`
     );
   }
 
