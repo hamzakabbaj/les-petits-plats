@@ -3,6 +3,7 @@ class App {
     this.recipeApi = new RecipeApi("./data/recipes.json");
     this.recipes = [];
     this.filteredRecipes = [];
+    this.numRecipes = 0;
   }
 
   async main() {
@@ -68,6 +69,7 @@ class App {
   }
 
   createRecipes(recipes) {
+    this.updateNumRecipes(recipes.length);
     const $recipesWrapper = document.getElementById("recipes");
     $recipesWrapper.innerHTML = "";
     const recipeCards = recipes.map((recipe) =>
@@ -76,6 +78,12 @@ class App {
     for (const recipeCard of recipeCards) {
       $recipesWrapper.appendChild(recipeCard);
     }
+  }
+
+  updateNumRecipes(numRecipes) {
+    this.numRecipes = numRecipes;
+    const $numRecipesWrapper = document.getElementById("num_recipes");
+    $numRecipesWrapper.textContent = `${this.numRecipes} recettes`;
   }
 }
 
