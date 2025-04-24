@@ -2,6 +2,22 @@ class FilterSelectBox {
   constructor(filter) {
     this._filter = filter;
     this._selected_items = [];
+    this._observers = [];
+  }
+
+  // ------------------- OBSERVER PATTERN -------------------------
+  subscribe(observer) {
+    this._observers.push(observer);
+  }
+
+  unsubscribe(observer) {
+    this._observers = this._observers.filter((obs) => obs !== observer);
+  }
+
+  notify() {
+    this._observers.forEach((observer) =>
+      observer.updateFilter(this._selected_items, this._filter.id)
+    );
   }
 
   // ------------------ ELEMENTS ------------------------
@@ -92,6 +108,7 @@ class FilterSelectBox {
           item.classList.add("selected");
           this._selected_items.push(item.textContent);
           this.setFilterLabels();
+          this.notify();
         }
       });
       item.querySelector("i").addEventListener("click", (e) => {
@@ -101,6 +118,7 @@ class FilterSelectBox {
           (selected_item) => selected_item !== item.textContent
         );
         this.setFilterLabels();
+        this.notify();
       });
     });
   }
@@ -213,6 +231,7 @@ class FilterSelectBox {
         );
         this.setFilterLabels($labels);
         this.setSearchItems(this._filter.list, this.getListElement());
+        this.notify();
       });
     });
   }

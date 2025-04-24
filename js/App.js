@@ -3,6 +3,7 @@ class App {
     this.recipeApi = new RecipeApi("./data/recipes.json");
     this.recipes = [];
     this.filteredRecipes = [];
+    this.tagsFilteredRecipes = [];
     this.numRecipes = 0;
   }
 
@@ -10,17 +11,29 @@ class App {
     const recipesData = await this.recipeApi.getRecipes();
     this.recipes = recipesData.map((recipe) => new Recipe(recipe));
     this.filteredRecipes = [...this.recipes];
-
+    this.tagsFilteredRecipes = [...this.recipes];
     // Search bar
     const searchBar = new SearchBar();
     searchBar.subscribe(this);
     this.createSearchBar(searchBar);
 
     // Filters
-    this.createFilters(this.recipes, [
-      IngredientsFilter,
-      AppareilsFilter,
-      UstensilsFilter,
+    const IngredientsFilterSelectBox = new FilterSelectBox(
+      new IngredientsFilter(this.recipes)
+    );
+    const AppareilsFilterSelectBox = new FilterSelectBox(
+      new AppareilsFilter(this.recipes)
+    );
+    const UstensilsFilterSelectBox = new FilterSelectBox(
+      new UstensilsFilter(this.recipes)
+    );
+    IngredientsFilterSelectBox.subscribe(this);
+    AppareilsFilterSelectBox.subscribe(this);
+    UstensilsFilterSelectBox.subscribe(this);
+    this.createFilters([
+      IngredientsFilterSelectBox,
+      AppareilsFilterSelectBox,
+      UstensilsFilterSelectBox,
     ]);
 
     // Recipes
@@ -28,7 +41,7 @@ class App {
   }
 
   // ------------------- OBSERVER PATTERN -------------------------
-  update(searchTerm) {
+  updateSearch(searchTerm) {
     if (searchTerm.length < 3) {
       this.filteredRecipes = [...this.recipes];
     } else {
@@ -41,6 +54,7 @@ class App {
           )
       );
     }
+    this.tagsFilteredRecipes = [...this.filteredRecipes];
     this.createRecipes(this.filteredRecipes);
     this.createFilters(this.filteredRecipes, [
       IngredientsFilter,
@@ -49,6 +63,34 @@ class App {
     ]);
   }
 
+  updateFilter(selectedItems, filterName) {
+    if (selectedItems.length === 0) {
+      this.tagsFilteredRecipes = [...this.filteredRecipes];
+    } else if (filterName === "ingredients") {
+      this.tagsFilteredRecipes = this.filteredRecipes.filter((recipe) =>
+        selectedItems.some((item) =>
+          recipe.ingredients
+            .map((ingredient) => ingredient.ingredient.toLowerCase())
+            .includes(item.toLowerCase())
+        )
+      );
+    } else if (filterName === "appareils") {
+      this.tagsFilteredRecipes = this.filteredRecipes.filter((recipe) =>
+        selectedItems.some((item) =>
+          recipe.appliance.toLowerCase().includes(item.toLowerCase())
+        )
+      );
+    } else if (filterName === "ustensiles") {
+      this.tagsFilteredRecipes = this.filteredRecipes.filter((recipe) =>
+        selectedItems.some((item) =>
+          recipe.ustensils
+            .map((ustensil) => ustensil.toLowerCase())
+            .includes(item.toLowerCase())
+        )
+      );
+    }
+    this.createRecipes(this.tagsFilteredRecipes);
+  }
   // ------------------- CREATE ELEMENTS -------------------------
   createSearchBar(searchBar) {
     const $heroHeaderWrapper = document.getElementById("hero_header");
@@ -56,15 +98,11 @@ class App {
     $heroHeaderWrapper.appendChild(searchBarElement);
   }
 
-  createFilters(recipes, Filters) {
+  createFilters(Filters) {
     const $filtersWrapper = document.getElementById("filters");
     $filtersWrapper.innerHTML = "";
     for (const Filter of Filters) {
-      const filter = new Filter(recipes);
-      const filterSelectBox = new FilterSelectBox(
-        filter
-      ).createFilterSelectBox();
-      $filtersWrapper.appendChild(filterSelectBox);
+      $filtersWrapper.appendChild(Filter.createFilterSelectBox());
     }
   }
 
