@@ -44,7 +44,7 @@ class IngredientsFilter extends Filter {
 
 class UstensilsFilter extends Filter {
   constructor(data) {
-    super(data, "Ustensils", "ustensils");
+    super(data, "Ustensiles", "ustensiles");
     this._list = this.list_filter_elements();
   }
 
