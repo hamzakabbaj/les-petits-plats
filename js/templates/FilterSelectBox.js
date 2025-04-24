@@ -33,16 +33,9 @@ class FilterSelectBox {
     const $wrapper = document.createElement("div");
     $wrapper.classList.add("main__header__filters__select-box__list");
     $wrapper.setAttribute("id", this._filter.id);
-    const filterSelectBoxItems = `
-      ${items
-        .map((item) =>
-          this._selected_items.includes(item)
-            ? `<li class="selected">${item}<i class="fa-solid fa-xmark"></i></li>`
-            : `<li>${item}<i class="fa-solid fa-xmark"></i></li>`
-        )
-        .join("")}
-    `;
-    $wrapper.innerHTML = filterSelectBoxItems;
+
+    this.setSearchItems(items, $wrapper);
+
     return $wrapper;
   }
 
@@ -51,19 +44,18 @@ class FilterSelectBox {
     const $title = this.getTitleElement($wrapper);
     const $clear_icon = this.getSearchBoxClearIconElement($wrapper);
     const $search_input = this.getSearchBoxInputElement($wrapper);
-    const $search_items = this.getSearchItemsElements($wrapper);
+    // const $search_items = this.getSearchItemsElements($wrapper);
+    const $list = this.getListElement($wrapper);
     const $body = document.querySelector("body");
 
-    console.log($search_items);
-
-    this.addItemsClickListener($search_items);
-    this.addSearchInputListener($search_input, $clear_icon, $wrapper);
-    this.addClearIconClickListener($clear_icon, $search_input);
+    // this.addItemsClickListener($search_items);
+    this.addSearchInputListener($search_input, $clear_icon, $list);
+    this.addClearIconClickListener($clear_icon, $search_input, $list);
     this.addChevronIconClickListener($title);
     this.addBodyClickListener($body);
   }
 
-  addSearchInputListener($search_input, $clear_icon, $wrapper) {
+  addSearchInputListener($search_input, $clear_icon, $list) {
     $search_input.addEventListener("input", () => {
       const search_value = $search_input.value;
       console.log(search_value);
@@ -78,7 +70,7 @@ class FilterSelectBox {
         item.toLowerCase().includes(search_value.toLowerCase())
       );
       // Replace the items
-      this.setSearchItems(filtered_list, $wrapper);
+      this.setSearchItems(filtered_list, $list);
     });
   }
 
@@ -95,19 +87,19 @@ class FilterSelectBox {
         e.stopPropagation();
         item.classList.remove("selected");
         this._selected_items = this._selected_items.filter(
-          (item) => item !== item.textContent
+          (selected_item) => selected_item !== item.textContent
         );
       });
     });
   }
 
-  addClearIconClickListener($clear_icon, $search_input, $wrapper) {
+  addClearIconClickListener($clear_icon, $search_input, $list) {
     $clear_icon.addEventListener("click", () => {
       $search_input.value = "";
       // Focus on the search input
       $search_input.focus();
       $clear_icon.classList.add("hidden");
-      this.setSearchItems(this._filter.list, $wrapper);
+      this.setSearchItems(this._filter.list, $list);
     });
   }
 
@@ -177,9 +169,17 @@ class FilterSelectBox {
     });
   }
 
-  setSearchItems(items, $wrapper) {
-    const $list = this.getListElement($wrapper);
-    $list.innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+  setSearchItems(items, $list) {
+    $list.innerHTML = items
+      .map((item) =>
+        this._selected_items.includes(item)
+          ? `<li class="selected">${item}<i class="fa-solid fa-xmark"></i></li>`
+          : `<li>${item}<i class="fa-solid fa-xmark"></i></li>`
+      )
+      .join("");
+
+    const $search_items = $list.querySelectorAll("li");
+    this.addItemsClickListener($search_items);
   }
 
   // ------------------- GETTERS ------------------------
