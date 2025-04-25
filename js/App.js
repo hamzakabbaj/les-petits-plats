@@ -19,7 +19,7 @@ class App {
 
     // Filters
 
-    this.createFilters();
+    this.createFilters(this.filteredRecipes);
 
     // Recipes
     this.createRecipes(this.filteredRecipes);
@@ -41,11 +41,7 @@ class App {
     }
     this.tagsFilteredRecipes = [...this.filteredRecipes];
     this.createRecipes(this.filteredRecipes);
-    this.createFilters(this.filteredRecipes, [
-      IngredientsFilter,
-      AppareilsFilter,
-      UstensilsFilter,
-    ]);
+    this.createFilters(this.filteredRecipes);
   }
 
   updateFilter(selectedItems, filterName) {
@@ -83,17 +79,17 @@ class App {
     $heroHeaderWrapper.appendChild(searchBarElement);
   }
 
-  createFilters() {
+  createFilters(recipes) {
     const $filtersWrapper = document.getElementById("filters");
     $filtersWrapper.innerHTML = "";
     const IngredientsFilterSelectBox = new FilterSelectBox(
-      new IngredientsFilter(this.recipes)
+      new IngredientsFilter(recipes)
     );
     const AppareilsFilterSelectBox = new FilterSelectBox(
-      new AppareilsFilter(this.recipes)
+      new AppareilsFilter(recipes)
     );
     const UstensilsFilterSelectBox = new FilterSelectBox(
-      new UstensilsFilter(this.recipes)
+      new UstensilsFilter(recipes)
     );
     IngredientsFilterSelectBox.subscribe(this);
     AppareilsFilterSelectBox.subscribe(this);
