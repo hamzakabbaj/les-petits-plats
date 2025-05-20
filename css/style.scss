@@ -372,4 +372,16 @@ body {
       }
     }
   }
+
+  &__no_recipes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-family: "Manrope", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #1b1b1b;
+  }
 }

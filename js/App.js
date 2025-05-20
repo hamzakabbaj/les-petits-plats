@@ -18,7 +18,6 @@ class App {
     this.createSearchBar(searchBar);
 
     // Filters
-
     this.createFilters(this.filteredRecipes);
 
     // Recipes
@@ -40,7 +39,7 @@ class App {
       );
     }
     this.tagsFilteredRecipes = [...this.filteredRecipes];
-    this.createRecipes(this.filteredRecipes);
+    this.createRecipes(this.filteredRecipes, searchTerm);
     this.createFilters(this.filteredRecipes);
   }
 
@@ -104,7 +103,7 @@ class App {
     }
   }
 
-  createRecipes(recipes) {
+  createRecipes(recipes, textFilter = null) {
     this.updateNumRecipes(recipes.length);
     const $recipesWrapper = document.getElementById("recipes");
     $recipesWrapper.innerHTML = "";
@@ -113,6 +112,14 @@ class App {
     );
     for (const recipeCard of recipeCards) {
       $recipesWrapper.appendChild(recipeCard);
+    }
+
+    if (recipes.length === 0 && textFilter) {
+      const $noRecipesWrapper = document.getElementById("no_recipes");
+      $noRecipesWrapper.textContent = `Aucune recette ne contient "${textFilter}", vous pouvez chercher "tarte aux pommes", "poisson", etc.`;
+    } else {
+      const $noRecipesWrapper = document.getElementById("no_recipes");
+      $noRecipesWrapper.textContent = "";
     }
   }
 
