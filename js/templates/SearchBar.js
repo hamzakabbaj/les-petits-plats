@@ -14,7 +14,9 @@ class SearchBar {
   }
 
   notify(searchTerm) {
-    this._observers.forEach((observer) => observer.updateSearch(searchTerm));
+    this._observers.forEach((observer) =>
+      observer.updateSearch(searchTerm, true)
+    );
   }
 
   // ------------------- ELEMENTS -------------------------

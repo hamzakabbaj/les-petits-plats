@@ -25,18 +25,33 @@ class App {
   }
 
   // ------------------- OBSERVER PATTERN -------------------------
-  updateSearch(searchTerm) {
+  updateSearch(searchTerm, useNativeLoops = false) {
     if (searchTerm.length < 3) {
       this.filteredRecipes = [...this.recipes];
     } else {
-      this.filteredRecipes = this.recipes.filter(
-        (recipe) =>
-          recipe.name.toLowerCase().includes(searchTerm) ||
-          recipe.description.toLowerCase().includes(searchTerm) ||
-          recipe.ingredients.some((ingredient) =>
-            ingredient.ingredient.toLowerCase().includes(searchTerm)
-          )
-      );
+      if (useNativeLoops) {
+        this.filteredRecipes = [];
+        for (const recipe of this.recipes) {
+          if (
+            recipe.name.toLowerCase().includes(searchTerm) ||
+            recipe.description.toLowerCase().includes(searchTerm) ||
+            recipe.ingredients.some((ingredient) =>
+              ingredient.ingredient.toLowerCase().includes(searchTerm)
+            )
+          ) {
+            this.filteredRecipes.push(recipe);
+          }
+        }
+      } else {
+        this.filteredRecipes = this.recipes.filter(
+          (recipe) =>
+            recipe.name.toLowerCase().includes(searchTerm) ||
+            recipe.description.toLowerCase().includes(searchTerm) ||
+            recipe.ingredients.some((ingredient) =>
+              ingredient.ingredient.toLowerCase().includes(searchTerm)
+            )
+        );
+      }
     }
     this.tagsFilteredRecipes = [...this.filteredRecipes];
     this.createRecipes(this.filteredRecipes, searchTerm);
